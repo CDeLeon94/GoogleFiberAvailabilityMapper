@@ -1,3 +1,4 @@
+# TODO: Add support for apartments
 import googlemaps as gmaps
 import numpy
 import requests
@@ -5,19 +6,20 @@ import requests
 import concurrent.futures
 import requests
 import time
+import os
 
-API_Key = '<<YOUR GOOGLE MAPS GEOCODING API KEY HERE>>'
+API_Key = os.environ.get('GMaps_API_Key')
 
-coord1 = (0,0) # Put coordinates for two opposing cordners of a rectangle to be scanned
-coord2 = (1,1)
-
-#0.01 Low Res || 0.003 Med Res ||| 0.002 High Res
-scanRes = 0.002
+coord1 = (29.44578, -98.52163) 
+coord2 = (29.45774, -98.54524)
 
 latStart = min(coord1[0],coord2[0])
 latEnd = max(coord1[0],coord2[0])
 lonStart = min(coord1[1],coord2[1])
 lonEnd = max(coord1[1],coord2[1])
+
+#0.01 Low Res || 0.003 Med Res ||| 0.002 High Res
+scanRes = 0.002
 
 out = []
 CONNECTIONS = 100
@@ -36,16 +38,25 @@ fileOutAvail = ""
 while not fileOutAvail:
     try:
         fileOutAvail  = open("dataAvail"+str(fileNum)+".csv", "x")
-        fileOutAvailMain  = open("dataAvail.csv", "a")
     except Exception as e:
         fileNum += 1
 
+try:
+    fileOutAvailMain  = open("dataAvail.csv", "a")
+except Exception as e:
+    print("dataAvail.csv is not available for writing. \nTERMINATING")
+    exit()
 
 fileOutAvail.write("Availability,StreetAddress,Zipcode\n")
 
 latChecks = (latEnd - latStart) / scanRes
 lonChecks = (lonEnd - lonStart) / scanRes
 numChecks = int(lonChecks * latChecks);
+
+cont = input(f"Starting {numChecks} checks. \nContinue? [Y/N]: ")
+if 'y' not in cont.lower():
+    exit()
+
 currcheck = 0
 coordsList = []
 availList = []
