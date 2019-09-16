@@ -1,7 +1,13 @@
 # GoogleFiberAvailabilityScanner
 
-Scrapes the google fiber website to check if a series of points within a region have Google Fiber available.
-Results are written out in 2 CSV files, one cumulative file and one for each individual scan.  
+Builds a map of available locations for Google Fiber in a given area. 
+
+## View the map
+Map is periodically updated on [Google My Maps](https://drive.google.com/open?id=1BmskoePJltElqjrGdvfk3NAz44toc1Fb&usp=sharing)
+
+## How it's done
+Utilizes Google’s reverse geocoding APIs and Python Requests package to scrape Google Fiber’s Availability website. The resulting data is exported to a csv that can be imported into your mapping application of choice. 
+
 
 # Requirements
  - Python 3
