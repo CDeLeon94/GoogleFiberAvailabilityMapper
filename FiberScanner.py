@@ -4,7 +4,6 @@ import numpy
 import requests
 
 import concurrent.futures
-import requests
 import time
 import os
 
