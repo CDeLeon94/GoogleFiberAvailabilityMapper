@@ -8,6 +8,11 @@ Map is periodically updated on [Google My Maps](https://drive.google.com/open?id
 ## How it's done
 Utilizes Google’s reverse geocoding APIs and Python Requests package to scrape Google Fiber’s Availability website. The resulting data is exported to a csv that can be imported into your mapping application of choice. 
 
+# Setup
+## Setup instructions to use as is
+ 1. Install the dependencies from the `requirements.txt` with ```pip install -r requirements.txt``` 
+ 2. Set up a Google Maps API key by following Google's Documentation [here](https://developers.google.com/maps/documentation/javascript/get-api-key)
+ 3. In System Properties on Windows Add a OS environment variable labeled 'GMaps_API_Key' and add the Google Maps API key (obtained from step 2) there.
 
 # Requirements
  - Python 3
